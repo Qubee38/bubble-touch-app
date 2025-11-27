@@ -46,6 +46,7 @@ export function createBubble(
     ...visual,
     requiredTaps,
     currentTaps: 0, // 初期は0回タップ
+    remainingTaps: requiredTaps, // 初期は必要タップ数と同じ
     isPopping: false,
     poppingProgress: 0,
   };
@@ -85,6 +86,9 @@ export function tapBubble(bubble: Bubble): Bubble {
   // タップ回数を増やす
   const newCurrentTaps = bubble.currentTaps + 1;
 
+  // 残りのタップ回数を減らす
+  const newRemainingTaps = bubble.remainingTaps - 1;
+
   // 必要なタップ回数に達したか？
   if (newCurrentTaps >= bubble.requiredTaps) {
     // 弾ける！
@@ -99,6 +103,7 @@ export function tapBubble(bubble: Bubble): Bubble {
     return {
       ...bubble,
       currentTaps: newCurrentTaps,
+      remainingTaps: newRemainingTaps,
       opacity: bubble.opacity * 0.85, // 少し薄くする
     };
   }

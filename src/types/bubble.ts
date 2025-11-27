@@ -20,8 +20,9 @@ export interface Bubble {
   glowIntensity: number; // 光沢の強さ（0-1）
 
   // タップ機能（Phase 4で使用）
-  requiredTaps: number;  // 弾けるまでに必要なタップ数
-  currentTaps: number;   // 現在のタップ数
+  requiredTaps: number;   // 弾けるまでに必要なタップ数
+  remainingTaps: number;  // 残りのタップ数
+  currentTaps: number;    // 現在のタップ数
 
   // アニメーション状態（Phase 3で使用）
   isPopping: boolean;    // 弾けるアニメーション中か

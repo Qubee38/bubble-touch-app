@@ -168,6 +168,21 @@ const BubbleCanvas = ({ width, height, maxTapsToPop = 1 }: BubbleCanvasProps) =>
         //   );
         //   ctx.restore();
         // }
+        
+        // 残りのタップ回数表示
+        if (bubble.requiredTaps > 1) {
+          ctx.save();
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+          ctx.font = 'bold 16px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(
+            `${bubble.remainingTaps}`,
+            bubble.x,
+            bubble.y
+          );
+          ctx.restore();
+        }
       }
     };
 

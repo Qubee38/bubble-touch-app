@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# ぷにぷにタッチ遊び 🫧
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+幼児（1歳児〜）向けのシャボン玉タッチアプリ
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+画面をタッチするとシャボン玉が弾け、自動的に新しいシャボン玉が生成され続けるインタラクティブアプリです。タップ回数によって色の濃さが変わり、視覚的に「硬さ」が分かります。
 
-## React Compiler
+## 主な機能
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🫧 **シャボン玉の自動生成**: 画面下部からふわふわ浮かび上がる
+- 👆 **タッチで弾ける**: タップすると拡大しながら弾けるアニメーション
+- ✨ **パーティクル**: 弾けると光の粒が飛び散る
+- 🔢 **タップ回数機能**: 1〜5回タップで弾けるシャボン玉
+- 🎵 **効果音**: タップ音、弾ける音、BGM
+- ⚙️ **設定画面**: 音量、タップ回数、難易度を調整可能
 
-## Expanding the ESLint configuration
+## 技術スタック
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18** + **TypeScript**
+- **Canvas API** - 高速な描画とアニメーション
+- **howler.js** - 音声管理
+- **Vite** - ビルドツール
+- **Vercel** - ホスティング
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ローカル開発
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 必要な環境
+- Node.js 18以上
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### セットアップ
+
+```bash
+# リポジトリをクローン
+git clone https://github.com/あなたのユーザー名/bubble-touch-app.git
+cd bubble-touch-app
+
+# 依存関係をインストール
+npm install
+
+# 開発サーバーを起動
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+ブラウザで `http://localhost:5173` にアクセス
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### ビルド
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
+
+## ディレクトリ構成
+
+```
+src/
+├── components/          # Reactコンポーネント
+│   ├── BubbleCanvas.tsx
+│   ├── SettingsPanel.tsx
+│   └── SettingsButton.tsx
+├── lib/                 # コアロジック
+│   ├── Bubble.ts
+│   ├── AudioManager.ts
+│   └── CanvasRenderer.ts
+├── utils/               # ユーティリティ
+│   ├── collision.ts
+│   ├── particles.ts
+│   └── storage.ts
+├── types/               # 型定義
+│   ├── bubble.ts
+│   └── settings.ts
+└── App.tsx
+```
+
+## 設定項目
+
+保護者向け設定画面（⚙️アイコンをタップ）で以下を調整可能：
+
+- **音の設定**: BGM、音量、ほめことば
+- **あそびかた**: タップ回数（1〜5回）
+- **むずかしさ**: 速度、大きさ
+
+設定はブラウザのlocalStorageに保存されます。
